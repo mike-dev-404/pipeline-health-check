@@ -1,0 +1,6 @@
+@DataManagerWebApp_HostAddress = http://localhost:5019
+
+GET {{DataManagerWebApp_HostAddress}}/user/gezeleb2/
+Accept: application/json
+
+###
