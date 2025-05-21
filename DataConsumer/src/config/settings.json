@@ -1,0 +1,4 @@
+{
+    "port": 3000,
+    "dataManagerUrl": "http://localhost:5000"
+}
