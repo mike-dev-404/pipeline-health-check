@@ -23,10 +23,10 @@ namespace DataManagerService
             return JsonSerializer.Deserialize<List<User>>(json, options) ?? new List<User>();
         }
 
+        public IEnumerable<User> GetAllUsersByNationality(string nationality)
+            => GetAllUsers().Where(user => Regex.Match(user.Nationality, nationality, RegexOptions.IgnoreCase).Success) ?? throw new KeyNotFoundException($"Users not found by nationality: {nationality}");
+
         public User GetUserById(string code)
-        {
-            var users = GetAllUsers();
-            return users.FirstOrDefault(user => Regex.Match(user.Username, code, RegexOptions.IgnoreCase).Success) ?? throw new KeyNotFoundException($"User not found: {code}");
-        }
+            => GetAllUsers().FirstOrDefault(user => Regex.Match(user.Username, code, RegexOptions.IgnoreCase).Success) ?? throw new KeyNotFoundException($"User not found: {code}");
     }
 }

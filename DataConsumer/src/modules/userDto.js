@@ -1,8 +1,8 @@
 class UserDto {
-  constructor({ username, email })
-  {
+  constructor({ username, email, nationality }) {
     this.username = username;
     this.email = email;
+    this.nationality = nationality;
   }
 }
 

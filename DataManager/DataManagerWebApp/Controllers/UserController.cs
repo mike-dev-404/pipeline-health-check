@@ -16,7 +16,7 @@ namespace DataManagerWebApp.Controllers
             _userService = userService;
         }
 
-        [Route("{code}")]
+        [Route("code/{code}")]
         [HttpGet]
         public IActionResult GetUser(string code)
         {
@@ -37,6 +37,38 @@ namespace DataManagerWebApp.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving the user: {code}", code);
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [Route("all")]
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                var users = _userService.GetAllUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving all users");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [Route("nationality/{nationality}")]
+        [HttpGet]
+        public IActionResult GetUsersbYNationality(string nationality)
+        {
+            try
+            {
+                var users = _userService.GetAllUsersByNationality(nationality);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving all users");
                 return StatusCode(500, "Internal server error");
             }
         }

@@ -6,6 +6,8 @@ namespace DataManagerService
     {
         IEnumerable<User> GetAllUsers();
 
-        public User GetUserById(string code);
+        User GetUserById(string code);
+
+        IEnumerable<User> GetAllUsersByNationality(string nationality);
     }
 }
