@@ -1,12 +1,6 @@
-﻿using BankingData;
-using DataManagerService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataManagerService;
 
-namespace DataManagerWebAppTest
+namespace DataManagerServiceTests
 {
     public class UserServiceTest
     {
