@@ -59,12 +59,17 @@ namespace DataManagerWebApp.Controllers
 
         [Route("nationality/{nationality}")]
         [HttpGet]
-        public IActionResult GetUsersbYNationality(string nationality)
+        public IActionResult GetUsersByNationality(string nationality)
         {
             try
             {
                 var users = _userService.GetAllUsersByNationality(nationality);
                 return Ok(users);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogError(ex, "Users not found: {nationality}", nationality);
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

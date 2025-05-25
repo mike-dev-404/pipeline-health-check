@@ -24,7 +24,14 @@ namespace DataManagerService
         }
 
         public IEnumerable<User> GetAllUsersByNationality(string nationality)
-            => GetAllUsers().Where(user => Regex.Match(user.Nationality, nationality, RegexOptions.IgnoreCase).Success) ?? throw new KeyNotFoundException($"Users not found by nationality: {nationality}");
+        {
+            var result = GetAllUsers().Where(user => Regex.Match(user.Nationality, nationality, RegexOptions.IgnoreCase).Success);
+
+            if (!result.Any())
+                throw new KeyNotFoundException($"Users not found by nationality: {nationality}");
+
+            return result;
+        }
 
         public User GetUserById(string code)
             => GetAllUsers().FirstOrDefault(user => Regex.Match(user.Username, code, RegexOptions.IgnoreCase).Success) ?? throw new KeyNotFoundException($"User not found: {code}");
