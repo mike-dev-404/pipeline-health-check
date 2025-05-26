@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: 'DEV-PersonalAgent'
+  name: 'PersonalPool'
 
 variables:
   buildConfiguration: 'Release'
