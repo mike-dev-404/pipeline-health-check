@@ -13,6 +13,8 @@ steps:
     packageType: 'sdk'
     version: '8.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
+    performMultiLevelLookup: true
+    includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet packages'
@@ -33,3 +35,16 @@ steps:
     command: 'test'
     projects: '**/*Tests.csproj'
     arguments: '--configuration $(buildConfiguration) --no-build --collect:"Code coverage"'
+    publishTestResults: true
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'DataManager'
